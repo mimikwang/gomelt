@@ -22,6 +22,7 @@ var TabThermo map[string]thermoParam = map[string]thermoParam{
 	"GA": {-8.2, -22.2},
 	"GG": {-8, -19.9},
 	"GT": {-8.4, -22.4},
+	"GC": {-9.8, -27.2},
 	"CA": {-8.5, -22.7},
 	"CC": {-8, -19.9},
 	"CG": {-10.6, -27.2},
