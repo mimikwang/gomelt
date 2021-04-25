@@ -1,5 +1,5 @@
 # gomelt
-
+[![GoDoc](https://godoc.org/github.com/mimikwang/gomelt?status.png)](http://godoc.org/github.com/mimikwang/gomelt)
 [![mimikwang](https://circleci.com/gh/mimikwang/gomelt.svg?style=shield)](https://circleci.com/gh/mimikwang/gomelt)
 
 ## Overview
