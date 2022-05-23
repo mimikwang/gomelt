@@ -3,6 +3,7 @@ package gomelt_test
 import (
 	"testing"
 
+	"github.com/go-playground/assert"
 	"github.com/mimikwang/gomelt"
 )
 
@@ -19,9 +20,7 @@ func TestReverse(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			actual := gomelt.Reverse(testCase.sequence)
-			if actual != testCase.expected {
-				t.Error()
-			}
+			assert.Equal(t, testCase.expected, actual)
 		})
 	}
 }

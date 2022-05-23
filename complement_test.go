@@ -3,6 +3,7 @@ package gomelt_test
 import (
 	"testing"
 
+	"github.com/go-playground/assert"
 	"github.com/mimikwang/gomelt"
 )
 
@@ -20,9 +21,7 @@ func TestComplement(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			actual := gomelt.Complement(testCase.sequence)
-			if actual != testCase.expected {
-				t.Error()
-			}
+			assert.Equal(t, testCase.expected, actual)
 		})
 	}
 }
@@ -42,9 +41,7 @@ func TestIsSelfComplement(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.name, func(t *testing.T) {
 			actual := gomelt.IsSelfComplement(testCase.sequence)
-			if actual != testCase.expected {
-				t.Error()
-			}
+			assert.Equal(t, testCase.expected, actual)
 		})
 	}
 }

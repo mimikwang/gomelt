@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/mimikwang/gomelt"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestOligoTm(t *testing.T) {
@@ -34,27 +35,18 @@ func TestOligoTm(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			actual, err := gomelt.OligoTm(testCase.sequence, testCase.thermoParam)
 
-			// Check for errors
-			if testCase.expectErr && err == nil {
-				t.Error()
-			}
-			if !testCase.expectErr && err != nil {
-				t.Error()
+			// Check errors
+			if testCase.expectErr {
+				assert.NotNil(t, err)
+			} else {
+				assert.Nil(t, err)
 			}
 
-			// Check values
-			if !AlmostEqual(actual.Tm, testCase.expected.Tm, 0.01) {
-				t.Error()
-			}
-			if !AlmostEqual(actual.Dh, testCase.expected.Dh, 0.01) {
-				t.Error()
-			}
-			if !AlmostEqual(actual.Ds, testCase.expected.Ds, 0.01) {
-				t.Error()
-			}
-			if !AlmostEqual(actual.Dg, testCase.expected.Dg, 0.01) {
-				t.Error()
-			}
+			// Check numerical values
+			assert.InDelta(t, testCase.expected.Tm, actual.Tm, 0.01)
+			assert.InDelta(t, testCase.expected.Dh, actual.Dh, 0.01)
+			assert.InDelta(t, testCase.expected.Ds, actual.Ds, 0.01)
+			assert.InDelta(t, testCase.expected.Dg, actual.Dg, 0.01)
 		})
 	}
 }
