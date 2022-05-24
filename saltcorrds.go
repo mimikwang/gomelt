@@ -1,7 +1,6 @@
 package gomelt
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -28,9 +27,11 @@ func SaltCorrDs(ds, monovalent, divalent, dntp float64, length int,
 // divToMono converts divalent salt concentration to monovalent salt
 // concentration
 func divToMono(divalent, dntp float64) (float64, error) {
-	if divalent < 0 || dntp < 0 {
-		err := fmt.Errorf("Divalent and Dntp should be greater or equal to 0")
-		return 0.0, err
+	if divalent < 0 {
+		return 0.0, ErrInvalidDivalent
+	}
+	if dntp < 0 {
+		return 0.0, ErrInvalidDntp
 	}
 
 	if divalent == 0 {

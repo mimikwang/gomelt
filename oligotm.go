@@ -1,7 +1,5 @@
 package gomelt
 
-import "fmt"
-
 // ThermoResult holds thermodynamics result
 type ThermoResult struct {
 	Dh float64 // kcal / mol
@@ -50,8 +48,7 @@ func OligoTm(sequence string, param ThermoParam) (ThermoResult, error) {
 	for i := 0; i < length-1; i++ {
 		subSeq := sequence[i : i+2]
 		if _, found := TabThermo[subSeq]; !found {
-			err := fmt.Errorf("Sequence must only contain A, G, C, or T bases")
-			return oligoTmErr, err
+			return oligoTmErr, ErrInvalidBase
 		}
 		dh += TabThermo[subSeq].dh
 		ds += TabThermo[subSeq].ds
