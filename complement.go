@@ -2,42 +2,30 @@ package gomelt
 
 import "math"
 
-// TabComplement maps complement bases
-var TabComplement = map[byte]byte{
-	'A': 'T',
-	'T': 'A',
-	'C': 'G',
-	'G': 'C',
-}
-
-// Complement complements a sequence
-func Complement(sequence string) string {
-	sequenceComp := ""
-	for i := 0; i < len(sequence); i++ {
-		if comp, found := TabComplement[sequence[i]]; found {
-			sequenceComp += string(comp)
-		} else {
-			// If base not found in the complement table, return original
-			// base
-			sequenceComp += string(sequence[i])
-		}
+// complementBase complements a base.  The original base is returned if the
+// base is not a DNA base.
+func complementBase(base byte) byte {
+	switch base {
+	case 'A':
+		return 'T'
+	case 'T':
+		return 'A'
+	case 'C':
+		return 'G'
+	case 'G':
+		return 'C'
+	default:
+		return base
 	}
-
-	return sequenceComp
 }
 
-// IsSelfComplement checks to see if a sequence is self complementary and
-// return true if it is and false if it is not
-func IsSelfComplement(sequence string) bool {
+// isSelfComplement checks to see if a sequence is self complementary and
+// return true if it is and false if it is not.
+func isSelfComplement(sequence string) bool {
 	length := len(sequence)
 
-	// If empty string, return false
-	if length < 1 {
-		return false
-	}
-
-	// If odd number of bases, return false
-	if math.Mod(float64(length), 2) == 1 {
+	// If empty string or odd number of bases, return false
+	if length < 1 || isOdd(length) {
 		return false
 	}
 
@@ -45,10 +33,16 @@ func IsSelfComplement(sequence string) bool {
 	for i := 0; i < midPoint; i++ {
 		start := sequence[i]
 		end := sequence[length-i-1]
-		if end != TabComplement[start] {
+		if end != complementBase(start) ||
+			!isDnaBase(start) ||
+			!isDnaBase(end) {
 			return false
 		}
 	}
-
 	return true
+}
+
+// isOdd returns true if the value is odd and false otherwise.
+func isOdd(value int) bool {
+	return math.Mod(float64(value), 2) == 1
 }
