@@ -11,7 +11,7 @@ import (
 //	monovalent : mM
 //	divalent   : mM
 //	dntp       : mM
-func SaltCorrDs(ds, monovalent, divalent, dntp float64, length int,
+func saltCorrDs(ds, monovalent, divalent, dntp float64, length int,
 ) (float64, error) {
 	divToMono, err := divToMono(divalent, dntp)
 	if err != nil {

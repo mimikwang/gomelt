@@ -26,7 +26,7 @@ import (
 
 func main() {
 	// Set up thermodynamics parameters
-	parameters := gomelt.ThermoParam{
+	parameters := gomelt.Params{
 		Monovalent: 50.0,
 		Divalent:   1.5,
 		Dntp:       0.2,
@@ -35,7 +35,7 @@ func main() {
 	}
 
 	// Calculate melting thermodynamics
-	result, _ := gomelt.OligoTm("AAAGGCCTT", parameters)
+	result, _ := gomelt.MeltingTemp("AAAGGCCTT", parameters)
 
 	fmt.Println(result.Tm)
 	// 20.24
